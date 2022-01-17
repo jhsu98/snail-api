@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="robots" content="noindex" />
+    <title>Snail Game</title>
+    <link
+      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  </head>
+  <body>
+   <h1>The Snail Game</h1>
+   <div style="border: 1px solid #000">
+      <div style="float:left;">
+         <h2>Run a Simulation</h2>
+   <form action="http://localhost:5000"  method="post">
+      Well Height
+      <label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
+         <span class="mdc-text-field__ripple"></span>
+         <span class="mdc-floating-label" id="my-label-id"></span>
+         <input name="H" class="mdc-text-field__input" type="number" min="0" step="1"
+                aria-labelledby="my-label-id"
+                aria-controls="my-helper-id"
+                aria-describedby="my-helper-id">
+         <span class="mdc-line-ripple"></span>
+       </label>
+       <div class="mdc-text-field-helper-line">
+         <div class="mdc-text-field-helper-text" id="my-helper-id" aria-hidden="true">helper text</div>
+       </div>
+      
+       Initial Climbing Distance
+      <label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
+         <span class="mdc-text-field__ripple"></span>
+         <span class="mdc-floating-label" id="my-label-id"></span>
+         <input name="U" class="mdc-text-field__input" type="number" min="0" step="1"
+                aria-labelledby="my-label-id"
+                aria-controls="my-helper-id"
+                aria-describedby="my-helper-id">
+         <span class="mdc-line-ripple"></span>
+       </label>
+       <div class="mdc-text-field-helper-line">
+         <div class="mdc-text-field-helper-text" id="my-helper-id" aria-hidden="true">helper text</div>
+       </div>
+      
+      Sliding Distance
+      <label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
+         <span class="mdc-text-field__ripple"></span>
+         <span class="mdc-floating-label" id="my-label-id"></span>
+         <input name="D" class="mdc-text-field__input" type="number" min="0" step="1"
+                aria-labelledby="my-label-id"
+                aria-controls="my-helper-id"
+                aria-describedby="my-helper-id">
+         <span class="mdc-line-ripple"></span>
+       </label>
+       <div class="mdc-text-field-helper-line">
+         <div class="mdc-text-field-helper-text" id="my-helper-id" aria-hidden="true">helper text</div>
+       </div>
+
+       Fatigue Factor
+      <label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
+         <span class="mdc-text-field__ripple"></span>
+         <span class="mdc-floating-label" id="my-label-id"></span>
+         <input name="F" class="mdc-text-field__input" type="number" min="0" max="100" step="1"
+                aria-labelledby="my-label-id"
+                aria-controls="my-helper-id"
+                aria-describedby="my-helper-id">
+         <span class="mdc-line-ripple"></span>
+       </label>
+       <div class="mdc-text-field-helper-line">
+         <div class="mdc-text-field-helper-text" id="my-helper-id" aria-hidden="true">helper text</div>
+       </div>
+       <button class="mdc-button mdc-button--raised">
+         <span class="mdc-button__label">Submit</span>
+       </button>
+    </form>
+    
+      </div>
+      <div style="float: left; width: 30px;">&nbsp;</div>
+      <div style="float:left;">
+         <h2>Previous Results</h2>
+
+    <div class="mdc-data-table">
+      <div class="mdc-data-table__table-container">
+        <table class="mdc-data-table__table" aria-label="Dessert calories">
+          <thead>
+            <tr class="mdc-data-table__header-row">
+              <th
+                class="mdc-data-table__header-cell"
+                role="columnheader"
+                scope="col"
+              >
+                Timestamp
+              </th>
+              <th
+                class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric"
+                role="columnheader"
+                scope="col"
+              >
+                H
+              </th>
+              <th
+                class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric"
+                role="columnheader"
+                scope="col"
+              >
+                U
+              </th>
+              <th
+                class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric"
+                role="columnheader"
+                scope="col"
+              >
+                D
+              </th>
+              <th
+                class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric"
+                role="columnheader"
+                scope="col"
+              >
+                F
+              </th>
+              <th
+                class="mdc-data-table__header-cell"
+                role="columnheader"
+                scope="col"
+              >
+                Result
+              </th>
+            </tr>
+          </thead>
+          <tbody class="mdc-data-table__content">
+            {% for item in data %}
+            <tr class="mdc-data-table__row">
+              <th class="mdc-data-table__cell" scope="row">
+                {{item.timestamp}}
+              </th>
+              <td class="mdc-data-table__cell mdc-data-table__cell--numeric">
+                {{item.H}}
+              </td>
+              <td class="mdc-data-table__cell mdc-data-table__cell--numeric">
+                {{item.U}}
+              </td>
+              <td class="mdc-data-table__cell mdc-data-table__cell--numeric">
+                {{item.D}}
+              </td>
+              <td class="mdc-data-table__cell mdc-data-table__cell--numeric">
+                {{item.F}}
+              </td>
+              <td class="mdc-data-table__cell">{{item.result}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+      </div>
+   </div>
+
+  </body>
+</html>
